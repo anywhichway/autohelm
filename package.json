@@ -1,0 +1,24 @@
+{
+  "name": "@anywhichway/autohelm",
+  "version": "0.0.2",
+  "description": "A library to support standardized table of contents and footnote navigation in HTML files",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anywhichway/autohelm.git"
+  },
+  "keywords": [
+    "markdown",
+    "navigation"
+  ],
+  "author": "Simon Y. Blackwell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anywhichway/autohelm/issues"
+  },
+  "homepage": "https://github.com/anywhichway/autohelm#readme"
+}
