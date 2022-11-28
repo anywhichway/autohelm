@@ -1,2 +1,2 @@
 # autohelm
-A library to support standardized navigation in HTML files generated from Markdown with headings
+A library to support standardized table of contents and footnote navigation in HTML files
