@@ -44,7 +44,7 @@ const buildTOC = ({tocSelector=".toc",dom = document.body}={}) => {
         [...dom.querySelectorAll("h"+i)].forEach((heading) => {
             if(heading.id.length===0) {
                 let text =  heading.textContent;
-                [" ","/",".","&"].forEach((separator) => {
+                [" ","/",".","&","(",")","{","}","[","]",":",";","<",">"].forEach((separator) => {
                     text = text.split(separator).map((word) => word.toLowerCase()).join("-")
                 })
                 heading.setAttribute("id",text);
