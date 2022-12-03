@@ -43,7 +43,7 @@ const buildTOC = ({tocSelector=".toc",dom = document.body}={}) => {
     for(let i=0;i<=6;i++) {
         [...dom.querySelectorAll("h"+i)].forEach((heading) => {
             if(heading.id.length===0) {
-                const text =  heading.textContent.replace(/[~`!@#$%\^&*()\-_=+\[{\]}\\|;.",<.>]/g,"")
+                const text =  heading.textContent.replace(/[~`!@#$%\^&*()\-_=+\[{\]}\\|;.",<.>\/?]/g," ")
                     .split(" ").map((word) => word.trim().toLowerCase()).join("-")
                 heading.setAttribute("id",text);
             }
