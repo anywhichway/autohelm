@@ -43,10 +43,8 @@ const buildTOC = ({tocSelector=".toc",dom = document.body}={}) => {
     for(let i=0;i<=6;i++) {
         [...dom.querySelectorAll("h"+i)].forEach((heading) => {
             if(heading.id.length===0) {
-                let text =  heading.textContent;
-                [" ","/",".","&","(",")","{","}","[","]",":",";","<",">"].forEach((separator) => {
-                    text = text.split(separator).map((word) => word.toLowerCase()).join("-")
-                })
+                let text =  heading.textContent.replace(/[~`!@#$%\^&*()-_=+\[{\]}\\|;.",<.>]/g,"");
+                text = text.split(separator).map((word) => word.trim().toLowerCase()).join("-")
                 heading.setAttribute("id",text);
             }
             heading.classList.add("autohelm-heading")
