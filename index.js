@@ -56,6 +56,31 @@ const buildTOC = ({tocSelector=".toc",dom = document.body}={}) => {
     }
     const toc = toTOC(dom,headings,tocEl);
     tocEl.insertAdjacentElement("afterend",toc);
+    if(tocEl.hasAttribute("data-toggle")) {
+        const styleInjected = document.getElementById("ah-toc-toggle-style");
+        if(!styleInjected) {
+            const style = document.createElement("style");
+            style.id = "ah-toc-toggle-style";
+            style.innerText = `
+                 .ah-toc-details[open] summary {
+                    position: relative;
+                    float: right;
+                    top: -1.5em;
+                    left: -10ch;
+                }
+            `;
+            document.body.appendChild(style);
+        }
+        const toc = document.createElement("details"),
+            summary = document.createElement("summary"),
+            detail = tocEl.nextElementSibling;
+        toc.classList.add("ah-toc-details");
+        tocEl.style.display = "inline";
+        tocEl.insertAdjacentElement("afterend",toc);
+        toc.style.marginLeft = "1ch";
+        toc.appendChild(summary);
+        toc.appendChild(detail);
+    }
 }
 
 const buildFootnotes = ({dom = document.body,footnotesTitle = "Footnotes",footnotesLevel=1}={}) => {
@@ -95,32 +120,6 @@ const buildFootnotes = ({dom = document.body,footnotesTitle = "Footnotes",footno
 const init = ({tocSelector=".toc",dom = document.body,footnotesTitle="Footnotes",footnotesLevel=1}={}) => {
     buildFootnotes({dom,footnotesTitle,footnotesLevel});
     buildTOC({tocSelector,dom});
-    let styleInjected;
-    [...document.body.querySelectorAll(tocSelector)].forEach((el) => {
-        if(el.hasAttribute("data-toggle")) {
-            if(!styleInjected) {
-                styleInjected = document.createElement("style");
-                styleInjected.innerText = `
-                     .ah-toc-details[open] summary {
-                        position: relative;
-                        float: right;
-                        top: -1.5em;
-                        left: -10ch;
-                    }
-                `;
-                document.body.appendChild(styleInjected);
-            }
-            const toc = document.createElement("details"),
-                summary = document.createElement("summary"),
-                detail = el.nextElementSibling;
-            toc.classList.add("ah-toc-details");
-            el.style.display = "inline";
-            el.insertAdjacentElement("afterend",toc);
-            toc.style.marginLeft = "1ch";
-            toc.appendChild(summary);
-            toc.appendChild(detail);
-        }
-    })
 }
 
 const engage = () => {
