@@ -54,35 +54,34 @@ const buildTOC = ({tocSelector=".toc",dom = document.body}={}) => {
         })
     }
     const headings = [...dom.querySelectorAll(".autohelm-heading")];
-    //while(!headings[0]?.classList.contains("toc") && headings.length>0) {
-     //   headings.shift();
-    //}
+    while(!headings[0]?.matches(tocSelector) && headings.length>0) {
+       headings.shift();
+    }
     const toc = toTOC(dom,headings,tocEl);
     tocEl.insertAdjacentElement("afterend",toc);
     if(tocEl.hasAttribute("data-toggle")) {
-        const styleInjected = document.getElementById("ah-toc-toggle-style");
-        if(!styleInjected) {
-            const style = document.createElement("style");
-            style.id = "ah-toc-toggle-style";
-            style.innerText = `
-                 .ah-toc-details[open] summary {
-                    position: relative;
-                    float: right;
-                    top: -1.5em;
-                    left: -10ch;
-                }
-            `;
-            document.head.appendChild(style);
-        }
-        const toc = document.createElement("details"),
-            summary = document.createElement("summary"),
-            detail = tocEl.nextElementSibling;
-        toc.classList.add("ah-toc-details");
-        tocEl.style.display = "inline";
+        const toc = document.createElement("div"),
+            open = document.createElement("span"),
+            close = document.createElement("span");
+        toc.appendChild(toc.nextElementSibling);
+        toc.style.display = "none";
+        open.innerHTML = "+";
+        open.style.display = "inline";
+        close.innerHTML = "-";
+        close.style.display = "none";
         tocEl.insertAdjacentElement("afterend",toc);
-        toc.style.marginLeft = "1ch";
-        toc.appendChild(summary);
-        toc.appendChild(detail);
+        tocEl.appendChild(open)
+        tocEl.appendChild(close);
+        open.addEventListener("click",() => {
+            toc.display = "block";
+            open.display = "none";
+            close.display = "inline";
+        })
+        close.addEventListener("click",() => {
+            toc.display = "none";
+            open.display = "inline";
+            close.display = "none";
+        })
     }
 }
 
