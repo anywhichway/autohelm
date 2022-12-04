@@ -29,7 +29,7 @@ const toTOC = (dom,headings,toc,previousLevel,previousHeading) => {
                     nextHeading = headings[1];
                 navspan.classList.add("autohelm-nav");
                 navspan.classList.add("autohelm-nav-up-down");
-                navspan.innerHTML = (previousHeading ? ` <a href="#${previousHeading.id}">&uarr;</a>` : '') + (nextHeading && !headingEl.classList.contains("toc") ?  ` <a href="#${nextHeading.id}">&darr;</a>` :'');
+                navspan.innerHTML = (previousHeading ? ` <a href="#${previousHeading.id}">&uarr;</a>` : '') + (nextHeading ?  ` <a href="#${nextHeading.id}">&darr;</a>` :'');
                 headingEl.appendChild(navspan);
             }
         }
@@ -125,10 +125,11 @@ const init = ({tocSelector=".toc",dom = document.body,footnotesTitle="Footnotes"
     buildTOC({tocSelector,dom});
 }
 
-const engage = () => {
+const engage = (tocSelector = ".toc") => {
     let tocPopup;
     document.body.addEventListener("click",(event) => {
-        const tocEl = document.body.querySelector(".toc");
+        debugger;
+        const tocEl = document.body.querySelector(tocSelector);
         if(tocEl) {
             const anchors = [...document.body.querySelectorAll(`.autohelm-toc a[href="#${tocEl.id}"]`)];
             if(anchors.includes(event.target) && !tocEl.contains(event.target)) {
