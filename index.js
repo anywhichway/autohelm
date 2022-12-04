@@ -38,7 +38,7 @@ const toTOC = (dom,headings,toc,previousLevel,previousHeading) => {
     return ul;
 }
 
-const buildTOC = ({tocSelector=".toc",dom = document.body}={}) => {
+const buildTOC = ({tocSelector=".autohelm-toc",dom = document.body}={}) => {
     const tocEl = dom.querySelector(tocSelector);
     if(!tocEl) {
         throw new Error(`No TOC element found for "${tocSelector}`);
@@ -116,12 +116,12 @@ const buildFootnotes = ({dom = document.body,footnotesTitle = "Footnotes",footno
     })
 }
 
-const init = ({tocSelector=".toc",dom = document.body,footnotesTitle="Footnotes",footnotesLevel=1}={}) => {
+const init = ({tocSelector=".autohelm-toc",dom = document.body,footnotesTitle="Footnotes",footnotesLevel=1}={}) => {
     buildFootnotes({dom,footnotesTitle,footnotesLevel});
     buildTOC({tocSelector,dom});
 }
 
-const engage = (tocSelector = ".toc") => {
+const engage = (tocSelector = ".autohelm-toc") => {
     let tocPopup;
     document.body.addEventListener("click",(event) => {
         const tocEl = document.body.querySelector(tocSelector);
