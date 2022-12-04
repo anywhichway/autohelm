@@ -107,8 +107,8 @@ const engage = () => {
                 event.preventDefault();
                 const {top,left} = event.target.getBoundingClientRect();
                 if(!tocPopup) {
-                    const clone = tocEl.nextElementSibling.cloneNode(true),
-                        tocPopup = document.createElement("div");
+                    tocPopup = document.createElement("div");
+                    const clone = tocEl.nextElementSibling.cloneNode(true);
                     tocPopup.classList.add("autohelm-toc-popup");
                     tocPopup.style.height = "300px";
                     tocPopup.style.zIndex = 100;
