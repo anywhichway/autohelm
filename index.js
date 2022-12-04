@@ -1,6 +1,7 @@
 const toTOC = (dom,headings,toc,previousLevel,previousHeading) => {
     const originalHeadings = [...headings],
-        ul = document.createElement("ol");
+        ul = document.createElement("ol"),
+        isRoot = !!previousLevel;
     let previousLI;
     while(headings.length>0) {
         const heading = headings[0],
@@ -17,18 +18,20 @@ const toTOC = (dom,headings,toc,previousLevel,previousHeading) => {
             previousLI.classList.add("autohelm-nav");
             ul.appendChild(previousLI);
             const headingEl = dom.querySelector("#"+heading.id),
-                navspan = document.createElement("span"),
-                tocspan = document.createElement('span'),
-                nextHeading = headings[1];
-            navspan.classList.add("autohelm-nav");
-            navspan.classList.add("autohelm-nav-up-down");
+                tocspan = document.createElement('span');
             tocspan.classList.add("autohelm-nav");
             tocspan.classList.add("autohelm-toc");
-            navspan.innerHTML = (previousHeading ? ` <a href="#${previousHeading.id}">&uarr;</a>` : '') + (nextHeading && !headingEl.classList.contains("toc") ?  ` <a href="#${nextHeading.id}">&darr;</a>` :'');
             tocspan.innerHTML = `<a href="#${toc.id}">&#9783;</a> `;
             previousHeading = headings.shift();
             headingEl.insertBefore(tocspan,headingEl.firstChild);
-            headingEl.appendChild(navspan);
+            if(!isRoot) {
+                const  navspan = document.createElement("span"),
+                    nextHeading = headings[1];
+                navspan.classList.add("autohelm-nav");
+                navspan.classList.add("autohelm-nav-up-down");
+                navspan.innerHTML = (previousHeading ? ` <a href="#${previousHeading.id}">&uarr;</a>` : '') + (nextHeading && !headingEl.classList.contains("toc") ?  ` <a href="#${nextHeading.id}">&darr;</a>` :'');
+                headingEl.appendChild(navspan);
+            }
         }
         //previousLI = li;
     }
