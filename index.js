@@ -69,7 +69,6 @@ const buildTOC = ({tocSelector=".toc",dom = document.body}={}) => {
         open.style.display = "inline";
         close.innerHTML = "-";
         close.style.display = "none";
-        tocEl.insertAdjacentElement("afterend",toc);
         tocEl.appendChild(open)
         tocEl.appendChild(close);
         open.addEventListener("click",() => {
@@ -135,17 +134,14 @@ const engage = (tocSelector = ".toc") => {
                 const {top,left} = event.target.getBoundingClientRect();
                 if(!tocPopup) {
                     tocPopup = document.createElement("div");
-                    let toc = tocEl.nextElementSibling;
-                    if(toc.tagName==="DETAILS") {
-                        toc = toc.lastElementChild;
-                    }
-                    const clone = toc.cloneNode(true);
+                    const clone = tocEl.nextElementSibling.cloneNode(true);
                     tocPopup.classList.add("autohelm-toc-popup");
                     tocPopup.style.height = "300px";
                     tocPopup.style.zIndex = 100;
                     tocPopup.style.background = "whitesmoke";
                     tocPopup.style.opacity = 1
                     tocPopup.style.borderRadius = "5px";
+                    clone.style.display = "block";
                     clone.style.maxHeight = "290px";
                     clone.style.marginTop = "5px";
                     clone.style.marginBottom = "5px";
