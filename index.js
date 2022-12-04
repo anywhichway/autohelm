@@ -60,10 +60,8 @@ const buildTOC = ({tocSelector=".toc",dom = document.body}={}) => {
     const toc = toTOC(dom,headings,tocEl);
     tocEl.insertAdjacentElement("afterend",toc);
     if(tocEl.hasAttribute("data-toggle")) {
-        const toc = document.createElement("div"),
-            open = document.createElement("span"),
+        const open = document.createElement("span"),
             close = document.createElement("span");
-        toc.appendChild(tocEl.nextElementSibling);
         toc.style.display = "none";
         open.innerHTML = "+";
         open.style.display = "inline";
