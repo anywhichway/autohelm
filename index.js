@@ -69,7 +69,7 @@ const buildTOC = ({tocSelector=".toc",dom = document.body}={}) => {
                     left: -10ch;
                 }
             `;
-            document.body.appendChild(style);
+            document.head.appendChild(style);
         }
         const toc = document.createElement("details"),
             summary = document.createElement("summary"),
