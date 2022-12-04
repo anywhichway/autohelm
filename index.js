@@ -98,7 +98,7 @@ const init = ({tocSelector=".toc",dom = document.body,footnotesTitle="Footnotes"
 }
 
 const engage = () => {
-    let tocClone;
+    let tocPopup;
     document.body.addEventListener("click",(event) => {
         const tocEl = document.body.querySelector(".toc");
         if(tocEl) {
@@ -106,27 +106,29 @@ const engage = () => {
             if(anchors.includes(event.target) && !tocEl.contains(event.target)) {
                 event.preventDefault();
                 const {top,left} = event.target.getBoundingClientRect();
-                if(!tocClone) {
-                    tocClone = tocEl.nextElementSibling.cloneNode(true);
-                    tocClone.classList.add("autohelm-toc-popup");
-                    tocClone.style.position = "absolute";
-                    tocClone.style.height = tocClone.style.maxHeight = "300px";
-                    tocClone.style.zIndex = 100;
-                    tocClone.style.background = "whitesmoke";
-                    tocClone.style.opacity = 1;
-                    tocClone.style.overflow = "auto";
-                    tocClone.classList.add("autohelm-toc-popup");
-                    tocClone.style.position = "absolute";
-                    document.body.appendChild(tocClone);
+                if(!tocPopup) {
+                    const clone = tocEl.nextElementSibling.cloneNode(true),
+                        tocPopup = document.createElement("div");
+                    tocPopup.classList.add("autohelm-toc-popup");
+                    tocPopup.style.height = "300px";
+                    tocPopup.style.zIndex = 100;
+                    tocPopup.style.background = "whitesmoke";
+                    tocPopup.style.opacity = 1
+                    tocPopup.style.borderRadius = "5px";
+                    clone.style.maxHeight = "290px";
+                    clone.style.marginTop = "5px";
+                    clone.style.marginBottom = "5px";
+                    clone.style.overflow = "auto";
+                    tocPopup.appendChild(clone);
+                    document.body.appendChild(tocPopup);
                 }
-                tocClone ||= tocEl.nextElementSibling.cloneNode(true);
-                tocClone.style.height = tocClone.style.maxHeight = "300px";
-                tocClone.style.top = top+300 > window.innerHeight ? top+window.scrollY-300+"px" : top+window.scrollY+"px";
-                tocClone.style.left =left+"px";
-                tocClone.style.display = "block";
+                tocPopup.style.position = "absolute";
+                tocPopup.style.top = top+300 > window.innerHeight ? top+window.scrollY-300+"px" : top+window.scrollY+"px";
+                tocPopup.style.left =left+"px";
+                tocPopup.style.display = "block";
             } else {
-                if(tocClone) {
-                    tocClone.style.display = "none";
+                if(tocPopup) {
+                    tocPopup.style.display = "none";
                 }
             }
         }
