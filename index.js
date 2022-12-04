@@ -63,21 +63,21 @@ const buildTOC = ({tocSelector=".toc",dom = document.body}={}) => {
         const open = document.createElement("span"),
             close = document.createElement("span");
         toc.style.display = "none";
-        open.innerHTML = "+";
+        open.innerHTML = "&#9660;";
         open.style.display = "inline";
-        close.innerHTML = "-";
+        close.innerHTML = "&#9650;";
         close.style.display = "none";
         tocEl.appendChild(open)
         tocEl.appendChild(close);
         open.addEventListener("click",() => {
-            toc.display = "block";
-            open.display = "none";
-            close.display = "inline";
+            toc.style.display = "block";
+            open.style.display = "none";
+            close.style.display = "inline";
         })
         close.addEventListener("click",() => {
-            toc.display = "none";
-            open.display = "inline";
-            close.display = "none";
+            toc.style.display = "none";
+            open.style.display = "inline";
+            close.style.display = "none";
         })
     }
 }
