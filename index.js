@@ -128,11 +128,10 @@ const init = ({tocSelector=".toc",dom = document.body,footnotesTitle="Footnotes"
 const engage = (tocSelector = ".toc") => {
     let tocPopup;
     document.body.addEventListener("click",(event) => {
-        debugger;
         const tocEl = document.body.querySelector(tocSelector);
         if(tocEl) {
             const anchors = [...document.body.querySelectorAll(`.autohelm-toc a[href="#${tocEl.id}"]`)];
-            if(anchors.includes(event.target) && !tocEl.contains(event.target)) {
+            if(anchors.includes(event.target)) {
                 event.preventDefault();
                 const {top,left} = event.target.getBoundingClientRect();
                 if(!tocPopup) {
