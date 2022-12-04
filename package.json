@@ -1,6 +1,6 @@
 {
   "name": "@anywhichway/autohelm",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "A library to support standardized table of contents and footnote navigation in HTML files",
   "type": "module",
   "main": "index.js",
