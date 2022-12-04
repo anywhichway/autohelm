@@ -63,24 +63,16 @@ const buildTOC = ({tocSelector=".autohelm-toc",dom = document.body}={}) => {
         const open = document.createElement("span"),
             close = document.createElement("span");
         toc.style.display = "none";
+        open.classList.add("autohelm-open-toc");
         open.innerHTML = "&#9660;";
         open.style.display = "inline";
         open.style.fontSize = "15px";
+        close.classList.add("autohelm-close-toc");
         close.innerHTML = "&#9650;";
         close.style.display = "none";
         close.style.fontSize = "15px";
         tocEl.appendChild(open)
         tocEl.appendChild(close);
-        open.addEventListener("click",() => {
-            toc.style.display = "block";
-            open.style.display = "none";
-            close.style.display = "inline";
-        })
-        close.addEventListener("click",() => {
-            toc.style.display = "none";
-            open.style.display = "inline";
-            close.style.display = "none";
-        })
     }
 }
 
@@ -128,6 +120,20 @@ const engage = (tocSelector = ".autohelm-toc") => {
     document.body.addEventListener("click",(event) => {
         const tocEl = document.body.querySelector(tocSelector);
         if(tocEl) {
+            if(event.target.classList.contains("autohelm-open-toc")) {
+                event.preventDefault();
+                tocEl.nextElementSibling.style.display = "block";
+                event.target.style.display = "none";
+                document.getElementsByClassName("autohelm-close-toc")[0].style.display = "inline";
+                return;
+            }
+            if(event.target.classList.contains("autohelm-close-toc")) {
+                event.preventDefault();
+                tocEl.nextElementSibling.style.display = "none";
+                event.target.style.display = "none";
+                document.getElementsByClassName("autohelm-open-toc")[0].style.display = "inline";
+                return;
+            }
             const anchors = [...document.body.querySelectorAll(`.autohelm-toc a[href="#${tocEl.id}"]`)];
             if(anchors.includes(event.target)) {
                 event.preventDefault();
