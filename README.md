@@ -39,4 +39,6 @@ See the site https://secst.org for an example of heavy use of Autohelm.
 
 # History (Reverse Chronological Order)
 
+2023-12-04 v0.0.25 Reduce size of open/close caret
+
 2023-12-04 v0.0.24 First documented public version

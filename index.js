@@ -65,8 +65,10 @@ const buildTOC = ({tocSelector=".autohelm-toc",dom = document.body}={}) => {
         toc.style.display = "none";
         open.innerHTML = "&#9660;";
         open.style.display = "inline";
+        open.style.fontSize = "15px";
         close.innerHTML = "&#9650;";
         close.style.display = "none";
+        close.style.fontSize = "15px";
         tocEl.appendChild(open)
         tocEl.appendChild(close);
         open.addEventListener("click",() => {
