@@ -95,6 +95,32 @@ const buildFootnotes = ({dom = document.body,footnotesTitle = "Footnotes",footno
 const init = ({tocSelector=".toc",dom = document.body,footnotesTitle="Footnotes",footnotesLevel=1}={}) => {
     buildFootnotes({dom,footnotesTitle,footnotesLevel});
     buildTOC({tocSelector,dom});
+    let styleInjected;
+    [...document.body.querySelectorAll(tocSelector)].forEach((el) => {
+        if(el.hasAttribute("data-toggle")) {
+            if(!styleInjected) {
+                styleInjected = document.createElement("style");
+                styleInjected.innerText = `
+                     .ah-toc-details[open] summary {
+                        position: relative;
+                        float: right;
+                        top: -1.5em;
+                        left: -10ch;
+                    }
+                `;
+                document.body.appendChild(styleInjected);
+            }
+            const toc = document.createElement("details"),
+                summary = document.createElement("summary"),
+                detail = el.nextElementSibling;
+            toc.classList.add("ah-toc-details");
+            el.style.display = "inline";
+            el.insertAdjacentElement("afterend",toc);
+            toc.style.marginLeft = "1ch";
+            toc.appendChild(summary);
+            toc.appendChild(detail);
+        }
+    })
 }
 
 const engage = () => {
@@ -108,7 +134,11 @@ const engage = () => {
                 const {top,left} = event.target.getBoundingClientRect();
                 if(!tocPopup) {
                     tocPopup = document.createElement("div");
-                    const clone = tocEl.nextElementSibling.cloneNode(true);
+                    let toc = tocEl.nextElementSibling;
+                    if(toc.tagName==="DETAILS") {
+                        toc = toc.lastElementChild;
+                    }
+                    const clone = toc.cloneNode(true);
                     tocPopup.classList.add("autohelm-toc-popup");
                     tocPopup.style.height = "300px";
                     tocPopup.style.zIndex = 100;
