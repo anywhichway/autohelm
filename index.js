@@ -63,7 +63,7 @@ const buildTOC = ({tocSelector=".toc",dom = document.body}={}) => {
         const toc = document.createElement("div"),
             open = document.createElement("span"),
             close = document.createElement("span");
-        toc.appendChild(toc.nextElementSibling);
+        toc.appendChild(tocEl.nextElementSibling);
         toc.style.display = "none";
         open.innerHTML = "+";
         open.style.display = "inline";
