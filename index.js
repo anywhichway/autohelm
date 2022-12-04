@@ -1,7 +1,7 @@
 const toTOC = (dom,headings,toc,previousLevel,previousHeading) => {
     const originalHeadings = [...headings],
         ul = document.createElement("ol"),
-        isRoot = !!previousLevel;
+        isRoot = previousLevel===undefined;
     let previousLI;
     while(headings.length>0) {
         const heading = headings[0],
