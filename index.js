@@ -112,9 +112,9 @@ const buildFootnotes = ({dom = document.body,footnotesTitle = "Footnotes",footno
     })
 }
 
-const init = ({tocSelector=".autohelm-toc",dom = document.body,footnotesTitle="Footnotes",footnotesLevel=1}={}) => {
+const init = ({tocSelector=".autohelm-toc",dom = document.body,footnotesTitle="Footnotes",footnotesLevel=1,directChildren}={}) => {
     buildFootnotes({dom,footnotesTitle,footnotesLevel});
-    buildTOC({tocSelector,dom});
+    buildTOC({tocSelector,dom,directChildren});
 }
 
 const engage = (tocSelector = ".autohelm-toc") => {
