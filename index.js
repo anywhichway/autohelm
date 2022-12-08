@@ -38,19 +38,21 @@ const toTOC = (dom,headings,toc,previousLevel,previousHeading) => {
     return ul;
 }
 
-const buildTOC = ({tocSelector=".autohelm-toc",dom = document.body}={}) => {
+const buildTOC = ({tocSelector=".autohelm-toc",dom = document.body,directChildren}={}) => {
     const tocEl = dom.querySelector(tocSelector);
     if(!tocEl) {
         throw new Error(`No TOC element found for "${tocSelector}`);
     }
     for(let i=0;i<=6;i++) {
         [...dom.querySelectorAll("h"+i)].forEach((heading) => {
-            if(heading.id.length===0) {
-                const text =  heading.textContent.replace(/[~`!@#$%\^&*()\-_=+\[{\]}\\|;.",<.>\/?]/g," ")
-                    .split(" ").map((word) => word.trim().toLowerCase()).join("-")
-                heading.setAttribute("id",text);
+            if(!directChildren || heading.parentElement===dom) {
+                if(heading.id.length===0) {
+                    const text =  heading.textContent.replace(/[~`!@#$%\^&*()\-_=+\[{\]}\\|;.",<.>\/?]/g," ")
+                        .split(" ").map((word) => word.trim().toLowerCase()).join("-")
+                    heading.setAttribute("id",text);
+                }
+                heading.classList.add("autohelm-heading")
             }
-            heading.classList.add("autohelm-heading")
         })
     }
     const headings = [...dom.querySelectorAll(".autohelm-heading")];
