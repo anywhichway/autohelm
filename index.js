@@ -56,9 +56,6 @@ const buildTOC = ({tocSelector=".autohelm-toc",dom = document.body,directChildre
         })
     }
     const headings = [...dom.querySelectorAll(".autohelm-heading")];
-    while(!headings[0]?.matches(tocSelector) && headings.length>0) {
-       headings.shift();
-    }
     const toc = toTOC(dom,headings,tocEl);
     tocEl.insertAdjacentElement("afterend",toc);
     if(tocEl.hasAttribute("data-toggle")) {
