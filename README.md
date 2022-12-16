@@ -39,6 +39,8 @@ See the site https://secst.org for an example of heavy use of Autohelm.
 
 # History (Reverse Chronological Order)
 
+2023-12-16 v0.0.29 Added option 'useSections' which will only use headings that are the first child of a section element.
+
 2023-12-08 v0.0.28 Added option 'directChildren' to init in addition the buildTOC.
 
 2023-12-08 v0.0.27 Added option 'directChildren' to restrict headings to only those that are direct children of the node being searched for headings.

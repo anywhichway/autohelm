@@ -38,14 +38,14 @@ const toTOC = (dom,headings,toc,previousLevel,previousHeading) => {
     return ul;
 }
 
-const buildTOC = ({tocSelector=".autohelm-toc",dom = document.body,directChildren}={}) => {
+const buildTOC = ({tocSelector=".autohelm-toc",dom = document.body,directChildren,useSections}={}) => {
     const tocEl = dom.querySelector(tocSelector);
     if(!tocEl) {
         throw new Error(`No TOC element found for "${tocSelector}`);
     }
     for(let i=0;i<=6;i++) {
         [...dom.querySelectorAll("h"+i)].forEach((heading) => {
-            if(!directChildren || heading.parentElement===dom) {
+            if(!directChildren || heading.parentElement===dom || (useSections && heading.parentElement.tagName==="SECTION" && !heading.previousElementSibling)) {
                 if(heading.id.length===0) {
                     const text =  heading.textContent.replace(/[~`!@#$%\^&*()\-_=+\[{\]}\\|;.",<.>\/?]/g," ")
                         .split(" ").map((word) => word.trim().toLowerCase()).join("-")
@@ -112,9 +112,9 @@ const buildFootnotes = ({dom = document.body,footnotesTitle = "Footnotes",footno
     })
 }
 
-const init = ({tocSelector=".autohelm-toc",dom = document.body,footnotesTitle="Footnotes",footnotesLevel=1,directChildren}={}) => {
+const init = ({tocSelector=".autohelm-toc",dom = document.body,footnotesTitle="Footnotes",footnotesLevel=1,directChildren,useSections}={}) => {
     buildFootnotes({dom,footnotesTitle,footnotesLevel});
-    buildTOC({tocSelector,dom,directChildren});
+    buildTOC({tocSelector,dom,directChildren,useSections});
 }
 
 const engage = (tocSelector = ".autohelm-toc") => {
