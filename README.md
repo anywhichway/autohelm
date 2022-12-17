@@ -39,6 +39,8 @@ See the site https://secst.org for an example of heavy use of Autohelm.
 
 # History (Reverse Chronological Order)
 
+2023-12-17 v0.0.31 Improved useSections to only select headers that are the first child of a section.
+
 2023-12-16 v0.0.30 Removed some secondary heading filtering.
 
 2023-12-16 v0.0.29 Added option 'useSections' which will only use headings that are the first child of a section element.
