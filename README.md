@@ -39,6 +39,8 @@ See the site https://secst.org for an example of heavy use of Autohelm.
 
 # History (Reverse Chronological Order)
 
+2023-12-17 v0.0.34 Remove TOC from the TOC itself.
+
 2023-12-17 v0.0.33 Fixed issue with previous and next arrows navigating to wrong place.
 
 2023-12-17 v0.0.32 Further improvements to section heading selection.

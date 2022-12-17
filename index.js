@@ -7,6 +7,7 @@ const toTOC = (dom,headings,toc,previousLevel,previousHeading) => {
         while(headings[0]!==toc) {
             headings.shift();
         }
+        headings.shift(); // remove toc itself
     }
     while(headings.length>0) {
         const heading = headings[0],
