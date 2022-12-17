@@ -3,6 +3,11 @@ const toTOC = (dom,headings,toc,previousLevel,previousHeading) => {
         ul = document.createElement("ol"),
         isRoot = previousLevel===undefined;
     let previousLI;
+    if(!previousLevel) {
+        while(headings[0]!==toc) {
+            headings.shift();
+        }
+    }
     while(headings.length>0) {
         const heading = headings[0],
             level = parseInt(heading.tagName.substring(1));
@@ -22,16 +27,16 @@ const toTOC = (dom,headings,toc,previousLevel,previousHeading) => {
             tocspan.classList.add("autohelm-nav");
             tocspan.classList.add("autohelm-toc");
             tocspan.innerHTML = `<a href="#${toc.id}">&#9783;</a> `;
-            previousHeading = headings.shift();
             headingEl.insertBefore(tocspan,headingEl.firstChild);
-            if(!isRoot) {
+            //if(!isRoot) {
                 const  navspan = document.createElement("span"),
                     nextHeading = headings[1];
                 navspan.classList.add("autohelm-nav");
                 navspan.classList.add("autohelm-nav-up-down");
                 navspan.innerHTML = (previousHeading ? ` <a href="#${previousHeading.id}">&uarr;</a>` : '') + (nextHeading ?  ` <a href="#${nextHeading.id}">&darr;</a>` :'');
                 headingEl.appendChild(navspan);
-            }
+            //}
+            previousHeading = headings.shift();
         }
         //previousLI = li;
     }
