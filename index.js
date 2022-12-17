@@ -45,7 +45,7 @@ const buildTOC = ({tocSelector=".autohelm-toc",dom = document.body,directChildre
     }
     for(let i=0;i<=6;i++) {
         [...dom.querySelectorAll("h"+i)].forEach((heading) => {
-            if(!directChildren || (!useSections && heading.parentElement===dom) || (useSections && heading.parentElement.tagName==="SECTION" && heading.parentElement.children[0]===heading)) {
+            if((!directChildren && !useSections) || (!useSections && heading.parentElement===dom) || (heading.parentElement.tagName==="SECTION" && heading.parentElement.children[0]===heading)) {
                 if(heading.id.length===0) {
                     const text =  heading.textContent.replace(/[~`!@#$%\^&*()\-_=+\[{\]}\\|;.",<.>\/?]/g," ")
                         .split(" ").map((word) => word.trim().toLowerCase()).join("-")
