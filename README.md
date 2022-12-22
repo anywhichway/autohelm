@@ -35,26 +35,38 @@ document.addEventListener((DOMContentLoaded) => {
 })
 ```
 
+# Styling
+
+These are the suggested styles to add to you stylesheet
+
+```css
+span.autohelm-nav a {text-decoration: unset; color:unset}
+span.autohelm-nav-up-down a {font-size: 80%; vertical-align:text-top}
+span.autohelm-footnote {position:relative; font-size:small; top:-.5em}
+```
+
 See the site https://secst.org for an example of heavy use of Autohelm.
 
 # History (Reverse Chronological Order)
 
-2023-12-17 v0.0.34 Remove TOC from the TOC itself.
+2022-12-22 v0.0.35 Corrected history dates, they were set to 2023. Added styling info to README.
 
-2023-12-17 v0.0.33 Fixed issue with previous and next arrows navigating to wrong place.
+2022-12-17 v0.0.34 Remove TOC from the TOC itself.
 
-2023-12-17 v0.0.32 Further improvements to section heading selection.
+2022-12-17 v0.0.33 Fixed issue with previous and next arrows navigating to wrong place.
 
-2023-12-17 v0.0.31 Improved useSections to only select headers that are the first child of a section.
+2022-12-17 v0.0.32 Further improvements to section heading selection.
 
-2023-12-16 v0.0.30 Removed some secondary heading filtering.
+2022-12-17 v0.0.31 Improved useSections to only select headers that are the first child of a section.
 
-2023-12-16 v0.0.29 Added option 'useSections' which will only use headings that are the first child of a section element.
+2022-12-16 v0.0.30 Removed some secondary heading filtering.
 
-2023-12-08 v0.0.28 Added option 'directChildren' to init in addition the buildTOC.
+2022-12-16 v0.0.29 Added option 'useSections' which will only use headings that are the first child of a section element.
 
-2023-12-08 v0.0.27 Added option 'directChildren' to restrict headings to only those that are direct children of the node being searched for headings.
+2022-12-08 v0.0.28 Added option 'directChildren' to init in addition the buildTOC.
 
-2023-12-04 v0.0.25 Reduce size of open/close caret
+2022-12-08 v0.0.27 Added option 'directChildren' to restrict headings to only those that are direct children of the node being searched for headings.
 
-2023-12-04 v0.0.24 First documented public version
+2022-12-04 v0.0.25 Reduce size of open/close caret
+
+2022-12-04 v0.0.24 First documented public version
